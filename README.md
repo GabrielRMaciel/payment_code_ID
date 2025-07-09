@@ -1,196 +1,239 @@
 # Sistema de Identificação de Cobranças - Empresa de Tecnologia Web
 
-Um sistema robusto de identificação e categorização de cobranças para empresas de tecnologia web, permitindo controle detalhado de projetos, fases e modalidades de pagamento.
+Sistema padronizado para identificação e controle de cobranças de serviços web, com códigos únicos para cada tipo de serviço, cliente e fase do projeto.
 
-## 📋 Índice
+## 📋 Estrutura do Código de Identificação
 
-- [Estrutura do Código](#estrutura-do-código)
-- [Tipos de Serviços](#tipos-de-serviços)
-- [Modalidades de Cobrança](#modalidades-de-cobrança)
-- [Algoritmo de Verificação](#algoritmo-de-verificação)
-- [Categorização por Fases](#categorização-por-fases)
-- [Exemplos Práticos](#exemplos-práticos)
-- [Relatórios e Análises](#relatórios-e-análises)
-- [Vantagens](#vantagens)
-
-## 🏗️ Estrutura do Código
-
-O sistema utiliza um código de identificação com 12 caracteres no formato:
-
+### Formato Geral
 ```
-XXYYZZZZZZDV
+XXYYSSSSSSDV
 ```
 
-### Componentes:
+**Componentes:**
 - **XX**: Tipo de serviço/produto (2 caracteres)
 - **YY**: Ano atual (2 últimos dígitos)
-- **ZZZZZZ**: Sequencial único (6 dígitos)
+- **SSSSSS**: Sigla da empresa cliente (6 caracteres)
 - **DV**: Dígito verificador (2 caracteres)
 
-**Exemplo**: `WS25000001AB`
+**Exemplo:** `WS25TECHNO6C`
 
-## 🛠️ Tipos de Serviços
+## 🔧 Tipos de Serviços/Produtos
 
 | Código | Serviço | Descrição | Exemplo |
 |--------|---------|-----------|---------|
-| `WS` | Sites Institucionais | Sites corporativos, portfólios, landing pages | `WS25000001AB` |
-| `EC` | E-commerce | Plataformas de venda online, marketplaces | `EC25000002CD` |
-| `SW` | Sistemas Web | ERPs, CRMs, dashboards, sistemas internos | `SW25000003EF` |
-| `AP` | Aplicações Mobile | Apps iOS, Android, PWAs | `AP25000004GH` |
-| `HD` | Hospedagem e Domínios | Serviços de hosting, registro de domínios | `HD25000005IJ` |
-| `MS` | Manutenção e Suporte | Atualizações, correções, suporte técnico | `MS25000006KL` |
-| `MD` | Marketing Digital | SEO, Google Ads, redes sociais | `MD25000007MN` |
-| `DG` | Design Gráfico | Identidade visual, layouts, prototipagem | `DG25000008OP` |
-| `CT` | Consultoria Tecnológica | Análise de sistemas, arquitetura, estratégia | `CT25000009QR` |
-| `TR` | Treinamentos | Capacitação em tecnologia, workshops | `TR25000010ST` |
+| **WS** | Desenvolvimento de Sites Institucionais | Sites corporativos, portfólios, landing pages | `WS25000001AB` |
+| **EC** | Lojas Virtuais / E-commerce | Plataformas de venda online, marketplaces | `EC25000002CD` |
+| **SW** | Sistemas Web Personalizados | ERPs, CRMs, dashboards, sistemas internos | `SW25000003EF` |
+| **AP** | Aplicações Mobile | Apps iOS, Android, PWAs | `AP25000004GH` |
+| **HD** | Hospedagem e Domínios | Serviços de hosting, registro de domínios | `HD25000005IJ` |
+| **MS** | Manutenção e Suporte | Atualizações, correções, suporte técnico | `MS25000006KL` |
+| **MD** | SEO e Marketing Digital | Otimização, Google Ads, redes sociais | `MD25000007MN` |
+| **DG** | Design Gráfico e UX/UI | Identidade visual, layouts, prototipagem | `DG25000008OP` |
+| **CT** | Consultoria Tecnológica | Análise de sistemas, arquitetura, estratégia digital | `CT25000009QR` |
+| **TR** | Treinamentos e Cursos | Capacitação em tecnologia, workshops | `TR25000010ST` |
 
-## 📊 Modalidades de Cobrança
+## 🏢 Sistema de Siglas de Empresas (6 caracteres)
 
-### Sites Institucionais (WS)
-- **Básico**: Até 5 páginas
-- **Avançado**: Até 15 páginas  
-- **Premium**: Ilimitado + funcionalidades extras
+### Regra Principal
+- **Primeira palavra:** Primeiras 3 letras
+- **Segunda palavra:** Primeiras 3 letras
+- **Resultado:** 6 caracteres sempre em maiúsculo
 
-### E-commerce (EC)
-- **Básico**: Até 50 produtos
-- **Profissional**: Até 500 produtos
-- **Enterprise**: Produtos ilimitados
-
-### Sistemas Web (SW)
-- **Simples**: Até 3 módulos
-- **Intermediário**: Até 8 módulos
-- **Complexo**: Módulos ilimitados
-
-### Hospedagem (HD)
-- **Básico**: 1GB, 1 domínio
-- **Profissional**: 5GB, 3 domínios
-- **Enterprise**: Recursos ilimitados
-
-## 🔐 Algoritmo de Verificação
-
-O sistema utiliza um algoritmo personalizado para gerar o dígito verificador:
-
-### Processo:
-1. **Soma ponderada** dos valores ASCII dos primeiros 10 caracteres
-2. **Multiplicadores**: `3, 7, 1, 9, 3, 7, 1, 9, 3, 7` (sequencialmente)
-3. **Módulo 36** para gerar caracteres alfanuméricos
-4. **Segundo dígito** baseado na soma do primeiro com valor original
-
-### Exemplo de Cálculo para `WS25000001`:
+### Exemplos de Formação
 ```
-W(87)×3 + S(83)×7 + 2(50)×1 + 5(53)×9 + 0(48)×3 + 0(48)×7 + 0(48)×1 + 0(48)×9 + 0(48)×3 + 1(49)×7
-= 261 + 581 + 50 + 477 + 144 + 336 + 48 + 432 + 144 + 343 = 2816
-
-Primeiro DV = 2816 % 36 = 8 → 8
-Segundo DV = (2816 + 8) % 36 = 20 → K
-
-Resultado: WS25000001K8
+TechnoSoft Sistemas → TECHNO
+Moda Fashion Store → MODAFA
+Construtora Reforma → CONSTR
+Dr. João Silva → DRJOAO
+Restaurante Gourmet → RESTAU
+Farmácia Popular → FARMAC
 ```
 
-## 🎯 Categorização por Fases
+### Regras Especiais
 
-### Sufixos de Fase:
-- **E (Entrada)**: 30% do valor - Sinal do projeto
-- **D (Desenvolvimento)**: 50% do valor - Parcelas intermediárias
-- **F (Final)**: 20% do valor - Entrega final
-- **M (Mensal)**: Cobrança recorrente
+#### Para nomes com uma palavra:
+- Usar as primeiras 6 letras
+- Exemplo: `Microsoft → MICROS`
 
-### Exemplos:
-- `WS25000001E8` - Sinal de site institucional
-- `WS25000001D9` - Desenvolvimento de site institucional
-- `WS25000001F0` - Entrega final de site institucional
-- `HD25000001M5` - Hospedagem mensal
+#### Para nomes com mais de duas palavras:
+- Primeira palavra: 3 letras + Segunda palavra: 3 letras
+- Exemplo: `Construtora Silva & Associados → CONSIL`
 
-## 💼 Exemplos Práticos
+#### Para nomes com títulos (Dr., Dra., etc.):
+- Incluir título + nome
+- Exemplo: `Dr. Carlos Pereira → DRCARL`
 
-### Projeto Site Institucional Completo:
+#### Para nomes com conectivos (&, E, DE, DA, DO):
+- Ignorar conectivos
+- Exemplo: `Silva & Santos → SILSAN`
+
+#### Para nomes curtos:
+- Completar com X
+- Exemplo: `Tech → TECHXX`
+
+## 📊 Exemplos de Siglas por Segmento
+
+### Clínicas e Consultórios
+- `CLINME` - Clínica Médica
+- `DRPEDR` - Dr. Pedro Silva
+- `ODONTO` - Odontologia Moderna
+- `FISIOT` - Fisioterapia Total
+
+### Lojas e Comércio
+- `MODAFA` - Moda Fashion
+- `SUPERM` - Supermercado
+- `FARMAC` - Farmácia Popular
+- `PETSHP` - Pet Shop
+
+### Indústrias
+- `INDMET` - Indústria Metalúrgica
+- `FABRIC` - Fábrica Têxtil
+- `CONSTR` - Construtora
+- `ELETR1` - Eletrônica Ltda
+
+### Serviços
+- `ESCRITT` - Escritório Advocacia
+- `CONTAB` - Contabilidade
+- `CONSUL` - Consultoria
+- `DESPAC` - Despachante
+
+### Restaurantes
+- `RESTAU` - Restaurante Gourmet
+- `PIZZAR` - Pizzaria Italiana
+- `HAMBUR` - Hamburguer House
+- `LANCHE` - Lanchonete
+
+## 🔐 Lógica de Geração do Dígito Verificador
+
+### Algoritmo Personalizado
+1. Soma ponderada dos valores ASCII dos primeiros 10 caracteres
+2. Multiplicadores: `3, 7, 1, 9, 3, 7, 1, 9, 3, 7` (sequencialmente)
+3. Módulo 36 para gerar caracteres alfanuméricos
+4. Segundo dígito baseado na soma do primeiro com valor original
+
+### Exemplo de Cálculo para `WS25TECHNO`
 ```
-WS25000001E8 - Sinal (30%)
-WS25000001D9 - Desenvolvimento (50%)
-WS25000001F0 - Entrega (20%)
-HD25000001M5 - Hospedagem mensal
+W(87)×3 + S(83)×7 + 2(50)×1 + 5(53)×9 + T(84)×3 + E(69)×7 + C(67)×1 + H(72)×9 + N(78)×3 + O(79)×7
+= 261 + 581 + 50 + 477 + 252 + 483 + 67 + 648 + 234 + 553 = 3606
+
+Primeiro DV = 3606 % 36 = 6 → 6
+Segundo DV = (3606 + 6) % 36 = 12 → C
+
+Resultado: WS25TECHNO6C
 ```
 
-### Projeto E-commerce Completo:
+## 📅 Categorização por Fases do Projeto
+
+### Tipos de Cobrança
+- **Entrada/Sinal (30% do valor)** - Sufixo: `E`
+- **Desenvolvimento/Parcelas (50% do valor)** - Sufixo: `D`
+- **Entrega/Final (20% do valor)** - Sufixo: `F`
+- **Mensalidade/Recorrente** - Sufixo: `M`
+
+### Exemplos
 ```
-EC25000002E1 - Sinal (30%)
-EC25000002D2 - Desenvolvimento (50%)
-EC25000002F3 - Entrega (20%)
-MS25000001M4 - Manutenção mensal
+WS25TECHNOE6 - Sinal (30%) - Site institucional
+WS25TECHNOD7 - Desenvolvimento (50%) - Site institucional
+WS25TECHNOF8 - Entrega (20%) - Site institucional
+HD25TECHNOM9 - Hospedagem mensal do site
 ```
 
-### Projeto Sistema Personalizado:
+## 💼 Exemplos Práticos por Projeto
+
+### Projeto Site Institucional Completo (TechnoSoft)
 ```
-SW25000003E5 - Sinal (30%)
-SW25000003D6 - Desenvolvimento (50%)
-SW25000003F7 - Entrega (20%)
-TR25000001U8 - Treinamento de usuários
+WS25TECHNOE6 - Sinal (30%) - Site institucional
+WS25TECHNOD7 - Desenvolvimento (50%) - Site institucional
+WS25TECHNOF8 - Entrega (20%) - Site institucional
+HD25TECHNOM9 - Hospedagem mensal do site
 ```
 
-## 📈 Relatórios e Análises
+### Projeto E-commerce Completo (Moda Fashion)
+```
+EC25MODAFAE1 - Sinal (30%) - Loja virtual
+EC25MODAFAD2 - Desenvolvimento (50%) - Loja virtual
+EC25MODAFAF3 - Entrega (20%) - Loja virtual
+MS25MODAFAM4 - Manutenção mensal da loja
+```
 
-### Por Tipo de Serviço:
-- **WS**: Quantidade de sites desenvolvidos
-- **EC**: Quantidade de lojas virtuais criadas
-- **SW**: Quantidade de sistemas personalizados
+### Projeto Sistema Personalizado (Construtora)
+```
+SW25CONSTRE5 - Sinal (30%) - Sistema ERP
+SW25CONSTRD6 - Desenvolvimento (50%) - Sistema ERP
+SW25CONSTRF7 - Entrega (20%) - Sistema ERP
+TR25CONSTRU8 - Treinamento de usuários
+```
+
+## 📈 Tabela de Referência por Porte de Cliente
+
+### Pequenas Empresas
+| Serviço | Código | Cliente | Exemplo |
+|---------|--------|---------|---------|
+| Site Básico | WS | Pet Shop | `WS25PETSHPK8` |
+| Loja Simples | EC | Farmácia | `EC25FARMACL9` |
+| Hospedagem Básica | HD | Clínica | `HD25CLINMEM0` |
+
+### Médias Empresas
+| Serviço | Código | Cliente | Exemplo |
+|---------|--------|---------|---------|
+| Site Avançado | WS | Restaurante | `WS25RESTAUN1` |
+| Sistema Web | SW | Escritório | `SW25ESCRITO2` |
+| Marketing Digital | MD | Indústria | `MD25INDMETP3` |
+
+### Grandes Empresas
+| Serviço | Código | Cliente | Exemplo |
+|---------|--------|---------|---------|
+| Site Premium | WS | Construtora | `WS25CONSTRQ4` |
+| Sistema Complexo | SW | Hospital | `SW25HOSPISR5` |
+| Consultoria | CT | Metalúrgica | `CT25METALS6` |
+
+## 📊 Relatórios Gerenciais
+
+### Por Tipo de Serviço
+- **WS**: Quantos sites foram desenvolvidos
+- **EC**: Quantas lojas virtuais foram criadas
+- **SW**: Quantos sistemas personalizados
 - **HD**: Receita recorrente de hospedagem
 
-### Por Modalidade:
+### Por Modalidade
 - **Entrada (E)**: Sinais recebidos
 - **Desenvolvimento (D)**: Parcelas intermediárias
 - **Final (F)**: Entregas finalizadas
 - **Mensal (M)**: Receita recorrente
 
-### Por Período:
+### Por Período
 - **Ano atual (25)**: Todos os projetos de 2025
 - **Comparativo mensal**: Crescimento/redução por tipo
 
-## ✨ Vantagens
+## ✅ Vantagens para Empresa de Tecnologia
 
-### Controle de Projetos:
-- ✅ Identificação rápida do tipo de serviço
-- ✅ Acompanhamento de fases do projeto
-- ✅ Controle de receita recorrente vs. pontual
+### Controle de Projetos
+- Identificação rápida do tipo de serviço
+- Acompanhamento de fases do projeto
+- Controle de receita recorrente vs. pontual
 
-### Gestão Financeira:
-- ✅ Separação clara entre entrada, desenvolvimento e entrega
-- ✅ Controle de mensalidades (hospedagem, manutenção)
-- ✅ Análise de rentabilidade por tipo de serviço
+### Gestão Financeira
+- Separação clara entre entrada, desenvolvimento e entrega
+- Controle de mensalidades (hospedagem, manutenção)
+- Análise de rentabilidade por tipo de serviço
 
-### Relatórios Comerciais:
-- ✅ Quantificação de sites vs. sistemas vs. apps vendidos
-- ✅ Análise de sazonalidade dos serviços
-- ✅ Identificação de clientes com maior volume de projetos
+### Relatórios Comerciais
+- Quantos sites vs. sistemas vs. apps foram vendidos
+- Sazonalidade dos serviços
+- Clientes com maior volume de projetos
 
-## 📚 Referência por Tipo de Cliente
+## 🚀 Como Usar
 
-### Pequenas Empresas:
-| Serviço | Código | Descrição | Exemplo |
-|---------|--------|-----------|---------|
-| Site Básico | WS | Até 5 páginas | `WS25000001K8` |
-| Loja Simples | EC | Até 50 produtos | `EC25000001L9` |
-| Hospedagem Básica | HD | 1GB, 1 domínio | `HD25000001M0` |
+1. **Identifique o tipo de serviço** usando a tabela de códigos
+2. **Gere a sigla do cliente** seguindo as regras estabelecidas
+3. **Aplique o ano atual** (2 últimos dígitos)
+4. **Calcule o dígito verificador** usando o algoritmo
+5. **Adicione o sufixo** conforme a fase do projeto
 
-### Médias Empresas:
-| Serviço | Código | Descrição | Exemplo |
-|---------|--------|-----------|---------|
-| Site Avançado | WS | Até 15 páginas | `WS25000002N1` |
-| Sistema Web | SW | Até 8 módulos | `SW25000001O2` |
-| Marketing Digital | MD | SEO + Ads | `MD25000001P3` |
+## 📝 Licença
 
-### Grandes Empresas:
-| Serviço | Código | Descrição | Exemplo |
-|---------|--------|-----------|---------|
-| Site Premium | WS | Ilimitado | `WS25000003Q4` |
-| Sistema Complexo | SW | Módulos ilimitados | `SW25000002R5` |
-| Consultoria | CT | Estratégia digital | `CT25000001S6` |
+Este sistema foi desenvolvido para uso interno de empresas de tecnologia web e pode ser adaptado conforme necessário.
 
 ---
 
-## 🤝 Contribuição
-
-Este sistema foi desenvolvido para otimizar o controle financeiro e operacional de empresas de tecnologia web. Para sugestões ou melhorias, por favor abra uma issue ou pull request.
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+*Documentação atualizada em 2025 - Sistema de Identificação de Cobranças v1.0*
